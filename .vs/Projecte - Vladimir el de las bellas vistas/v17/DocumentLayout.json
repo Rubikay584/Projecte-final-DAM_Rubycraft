@@ -3,14 +3,6 @@
   "WorkspaceRootPath": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\structure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\structure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\biomeattributes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\biomeattributes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\world.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chunk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|f:\\classe\\jocs-vladimir\\projecte - vladimir el de las bellas vistas\\assets\\scripts\\voxeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\voxeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\voxeldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -27,12 +19,20 @@
       "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\noise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\toolbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\toolbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\biomeattributes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\biomeattributes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|f:\\classe\\jocs-vladimir\\projecte - vladimir el de las bellas vistas\\assets\\scripts\\structure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\structure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\toolbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\toolbar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{889CB66A-8AF9-B6B9-F72A-B214157E99C6}|Assembly-CSharp.csproj|F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\assets\\scripts\\debugscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,24 +50,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Structure.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Structure.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Structure.cs",
               "ToolTip": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Structure.cs",
               "RelativeToolTip": "Assets\\Scripts\\Structure.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAADwvx0AAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-19T15:47:33.927Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Toolbar.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Toolbar.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Toolbar.cs",
@@ -103,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Player.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player.cs",
@@ -111,11 +111,12 @@
               "RelativeToolTip": "Assets\\Scripts\\Player.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAIwAoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T17:24:04.755Z"
+              "WhenOpened": "2025-03-04T17:24:04.755Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "BiomeAttributes.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\BiomeAttributes.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\BiomeAttributes.cs",
@@ -128,7 +129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Noise.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Noise.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Noise.cs",
@@ -136,11 +137,12 @@
               "RelativeToolTip": "Assets\\Scripts\\Noise.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T11:25:06.297Z"
+              "WhenOpened": "2025-02-28T11:25:06.297Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "VoxelData.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\VoxelData.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\VoxelData.cs",
@@ -153,26 +155,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Chunk.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Chunk.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Chunk.cs",
               "ToolTip": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\Chunk.cs",
               "RelativeToolTip": "Assets\\Scripts\\Chunk.cs",
-              "ViewState": "AgIAAJsAAAAAAAAAAAA3wKAAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAmwLcAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T15:05:57.352Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "World.cs",
               "DocumentMoniker": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\World.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\World.cs",
               "ToolTip": "F:\\Classe\\Jocs-vladimir\\Projecte - Vladimir el de las bellas vistas\\Assets\\Scripts\\World.cs",
               "RelativeToolTip": "Assets\\Scripts\\World.cs",
-              "ViewState": "AgIAAPsAAAAAAAAAAAAiwA0BAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T17:59:17.472Z",
               "EditorCaption": ""
