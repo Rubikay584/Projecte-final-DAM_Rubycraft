@@ -18,7 +18,7 @@ public class BiomeAttributes : ScriptableObject {
     [Range(0.1f, 1f)] public float treePlacementThreshold = 0.8f;
 
     public int maxTreeHeight = 12;
-    public int minTreeHeight = 4; // 5?
+    public int minTreeHeight = 5; // 5?
 
     public Lode[] lodes;
 

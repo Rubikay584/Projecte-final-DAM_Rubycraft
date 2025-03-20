@@ -267,9 +267,9 @@ public class World : MonoBehaviour {
         /* TREE PASS */
         if (yPos == terrainHeight) {
             if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.treeZoneScale) > biome.treeZoneThreshold) {
-                voxelValue = 11;
+                //voxelValue = 11;
                 if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.treePlacementScale) > biome.treePlacementThreshold) {
-                    voxelValue = 8;
+                    //voxelValue = 8;
                     Structure.MakeTree(pos, modifications, biome.minTreeHeight, biome.maxTreeHeight);
                     //Structure.MakeTree(new Vector3(71, 79, 68), modifications, biome.minTreeHeight, biome.maxTreeHeight);
                     //Structure.MakeTree(new Vector3(pos.x, pos.y, pos.z), modifications, biome.minTreeHeight, biome.maxTreeHeight);
