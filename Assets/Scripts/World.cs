@@ -29,12 +29,14 @@ public class World : MonoBehaviour {
 
     Queue<Queue<VoxelMod>> modifications = new Queue<Queue<VoxelMod>>();
 
+    public bool _inUI = false;
+
     public GameObject debugScreen;
 
     private void Start() {
         Random.InitState(seed);
 
-        spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 125f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
+        spawnPosition = new Vector3((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f, VoxelData.ChunkHeight - 160f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
     }
@@ -109,8 +111,7 @@ public class World : MonoBehaviour {
                 VoxelMod v = queue.Dequeue();
                 ChunkCoord c = GetChunkCoordFromVector3(v.position);
 
-                if (chunks[c.x, c.z] == null)
-                {
+                if (chunks[c.x, c.z] == null) {
                     chunks[c.x, c.z] = new Chunk(c, this, true);
                     activeChunks.Add(c);
                 }
@@ -193,6 +194,14 @@ public class World : MonoBehaviour {
             return blockTypes[chunks[thisChunk.x, thisChunk.z].GetVoxelFromGlobalVector3(pos)].isTransparent;
 
         return blockTypes[GetVoxel(pos)].isTransparent;
+    }
+
+    public bool inUI {
+        get { return _inUI; }
+        set {
+            _inUI = value;
+
+        }
     }
 
     // IMPORTANT

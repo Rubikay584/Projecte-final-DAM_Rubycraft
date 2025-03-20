@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\World.cs" />
     <Compile Include="Assets\Scripts\BiomeAttributes.cs" />
+    <Compile Include="Assets\Scripts\ItemStack.cs" />
     <Compile Include="Assets\Scripts\Structure.cs" />
     <Compile Include="Assets\Scripts\Noise.cs" />
     <Compile Include="Assets\Scripts\Chunk.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Assets\Scripts\DebugScreen.cs" />
     <Compile Include="Assets\Scripts\Toolbar.cs" />
     <Compile Include="Assets\Scripts\LOAD\MenuController.cs" />
+    <Compile Include="Assets\Scripts\UIItemSlot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
