@@ -7,6 +7,10 @@ public class World : MonoBehaviour {
     public int seed;
     public BiomeAttributes biome;
 
+    [Range(0.95f, 0f)] public float globalLightLevel;
+    public Color day;
+    public Color night;
+
     public Transform player;
     public Vector3 spawnPosition;
     
@@ -46,6 +50,9 @@ public class World : MonoBehaviour {
 
     private void Update() {
         playerCurrentChunkCoord = GetChunkCoordFromVector3(player.position);
+
+        Shader.SetGlobalFloat("GlobalLightLevel", globalLightLevel);
+        Camera.main.backgroundColor = Color.Lerp(day, night, globalLightLevel);
 
         // Only update the chunks if the player has moved from the chunk they were previously on.
         if (!playerCurrentChunkCoord.Equals(playerLastChunkCoord))
@@ -104,6 +111,31 @@ public class World : MonoBehaviour {
         }
     }
 
+    //void ApplyModifications() {
+    //    applyingModifications = true;
+
+    //    while (modifications.Count > 0) {
+    //        Queue<VoxelMod> queue = modifications.Dequeue();
+
+    //        while (queue.Count > 0) {
+    //            VoxelMod v = queue.Dequeue();
+    //            ChunkCoord c = GetChunkCoordFromVector3(v.position);
+
+    //            if (chunks[c.x, c.z] == null) {
+    //                chunks[c.x, c.z] = new Chunk(c, this, true);
+    //                activeChunks.Add(c);
+    //            }
+
+    //            chunks[c.x, c.z].modifications.Enqueue(v);
+
+    //            if (!chunksToUpdate.Contains(chunks[c.x, c.z]))
+    //                chunksToUpdate.Add(chunks[c.x, c.z]);
+    //        }
+    //    }
+
+    //    applyingModifications = false;
+    //}
+
     void ApplyModifications() {
         applyingModifications = true;
 
@@ -126,7 +158,7 @@ public class World : MonoBehaviour {
                     // Validación de coordenadas
                     if (c.x < 0 || c.x >= chunks.GetLength(0) ||
                         c.z < 0 || c.z >= chunks.GetLength(1)) {
-                        Debug.LogError($"Coordenadas de chunk inválidas: ({c.x}, {c.z})");
+                        //Debug.LogError($"Coordenadas de chunk inválidas: ({c.x}, {c.z})");
                         continue;
                     }
 
