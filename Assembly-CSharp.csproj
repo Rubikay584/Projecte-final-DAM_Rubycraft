@@ -65,7 +65,9 @@
     <Compile Include="Assets\Scripts\ItemStack.cs" />
     <Compile Include="Assets\Scripts\Structure.cs" />
     <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Scripts\CreativeInventory.cs" />
     <Compile Include="Assets\Scripts\Chunk.cs" />
+    <Compile Include="Assets\Scripts\DragAndDropHandler.cs" />
     <Compile Include="Assets\Scripts\VoxelData.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\DebugScreen.cs" />

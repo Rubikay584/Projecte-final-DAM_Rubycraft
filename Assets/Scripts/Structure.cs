@@ -16,32 +16,32 @@ public static class Structure {
         }
 
 
-        //for (int x = -3; x < 4; x++) {
-        //    for (int y = 0; y < 7; y++) {
-        //        for (int z = -3; z < 4; z++) {
-        //            //Debug.Log("entrar for fulles "+x+y+z);
-        //            //Debug.Log(x + " " + y + " " + z + " ");
-        //            queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height + y, position.z + z), 5));
-        //        }
-        //    }
-        //}
-
-        for (int x = -2; x < 3; x++)
-            for (int z = -2; z < 3; z++) {
-                queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 2, position.z + z), 5));
-                queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 3, position.z + z), 5));
+        for (int x = -3; x < 4; x++) {
+            for (int y = 0; y < 7; y++) {
+                for (int z = -3; z < 4; z++) {
+                    //Debug.Log("entrar for fulles "+x+y+z);
+                    //Debug.Log(x + " " + y + " " + z + " ");
+                    queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height + y, position.z + z), 5));
+                }
             }
+        }
 
-        for (int x = -1; x < 2; x++)
-            for (int z = -1; z < 2; z++)
-                queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 1, position.z + z), 5));
+        //for (int x = -2; x < 3; x++)
+        //    for (int z = -2; z < 3; z++) {
+        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 2, position.z + z), 5));
+        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 3, position.z + z), 5));
+        //    }
 
-        for (int x = -1; x < 2; x++)
-            if (x == 0)
-                for (int z = -1; z < 2; z++)
-                    queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height, position.z + z), 5));
-            else
-                queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height, position.z), 5));
+        //for (int x = -1; x < 2; x++)
+        //    for (int z = -1; z < 2; z++)
+        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 1, position.z + z), 5));
+
+        //for (int x = -1; x < 2; x++)
+        //    if (x == 0)
+        //        for (int z = -1; z < 2; z++)
+        //            queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height, position.z + z), 5));
+        //    else
+        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height, position.z), 5));
 
 
         return queue;

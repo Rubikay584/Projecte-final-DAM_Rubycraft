@@ -33,6 +33,9 @@ public class World : MonoBehaviour {
 
     public GameObject debugScreen;
 
+    public GameObject creativeInventoryWindow;
+    public GameObject cursorSlot;
+
     private void Start() {
         Random.InitState(seed);
 
@@ -104,26 +107,50 @@ public class World : MonoBehaviour {
     void ApplyModifications() {
         applyingModifications = true;
 
-        while (modifications.Count > 0) {
-            Queue<VoxelMod> queue = modifications.Dequeue();
+        try {
+            while (modifications.Count > 0) {
+                Queue<VoxelMod> queue;
 
-            while (queue.Count > 0) {
-                VoxelMod v = queue.Dequeue();
-                ChunkCoord c = GetChunkCoordFromVector3(v.position);
+                // Manejo seguro de la cola
+                lock (modifications) {
+                    if (modifications.Count == 0)
+                        break;
 
-                if (chunks[c.x, c.z] == null) {
-                    chunks[c.x, c.z] = new Chunk(c, this, true);
-                    activeChunks.Add(c);
+                    queue = modifications.Dequeue();
                 }
 
-                chunks[c.x, c.z].modifications.Enqueue(v);
+                while (queue?.Count > 0) {
+                    VoxelMod v = queue.Dequeue();
+                    ChunkCoord c = GetChunkCoordFromVector3(v.position);
 
-                if (!chunksToUpdate.Contains(chunks[c.x, c.z]))
-                    chunksToUpdate.Add(chunks[c.x, c.z]);
+                    // Validación de coordenadas
+                    if (c.x < 0 || c.x >= chunks.GetLength(0) ||
+                        c.z < 0 || c.z >= chunks.GetLength(1)) {
+                        Debug.LogError($"Coordenadas de chunk inválidas: ({c.x}, {c.z})");
+                        continue;
+                    }
+
+                    // Manejo seguro del chunk
+                    if (chunks[c.x, c.z] == null) {
+                        chunks[c.x, c.z] = new Chunk(c, this, true);
+                        activeChunks.Add(c);
+                    }
+
+                    // Validación del chunk
+                    if (chunks[c.x, c.z] != null) {
+                        chunks[c.x, c.z].modifications.Enqueue(v);
+
+                        if (!chunksToUpdate.Contains(chunks[c.x, c.z]))
+                            chunksToUpdate.Add(chunks[c.x, c.z]);
+                    } else
+                        Debug.LogError($"No se pudo crear el chunk en ({c.x}, {c.z})");
+                }
             }
+        } catch (System.Exception e) {
+            Debug.LogError($"Error en ApplyModifications: {e.Message}");
+        } finally {
+            applyingModifications = false;
         }
-
-        applyingModifications = false;
     }
 
     ChunkCoord GetChunkCoordFromVector3 (Vector3 pos) {
@@ -200,7 +227,15 @@ public class World : MonoBehaviour {
         get { return _inUI; }
         set {
             _inUI = value;
-
+            if (_inUI) {
+                Cursor.lockState = CursorLockMode.None;
+                creativeInventoryWindow.SetActive(true);
+                cursorSlot.SetActive(true);
+            } else {
+                Cursor.lockState = CursorLockMode.Locked;
+                creativeInventoryWindow.SetActive(false);
+                cursorSlot.SetActive(false);
+            }
         }
     }
 
@@ -297,6 +332,7 @@ public class BlockType {
     public bool isSolid;
     public bool isTransparent;
     public Sprite icon;
+    public int maxStackSize;
 
     [Header("Textures values")]
     public int backFaceTexture;
