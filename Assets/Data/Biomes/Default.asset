@@ -31,7 +31,7 @@ MonoBehaviour:
     threshold: 0.5
     noiseOffset: 0
   - nodeName: Sand
-    blockID: 8
+    blockID: 9
     minHeight: 40
     maxHeight: 70
     scale: 0.2
