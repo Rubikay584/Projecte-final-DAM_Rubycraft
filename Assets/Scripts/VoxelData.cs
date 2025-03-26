@@ -8,6 +8,11 @@ public static class VoxelData {
     public static readonly int ChunkHeight = 256;
     public static readonly int WorldSizeInChunks = 10;
 
+    // Lightning Values
+    public static float minLightLevel = 0.15f;
+    public static float maxLightLevel = 0.8f;
+    public static float lightFalloff = 0.08f;
+
     public static int WorldSizeInVoxels {
         get { return WorldSizeInChunks * ChunkWidth; }
     }
