@@ -1744,7 +1744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 13148417
   biome: {fileID: 11400000, guid: b1c048f58d4b0ff45a40829c892cf716, type: 2}
-  enableThreading: 0
+  enableThreading: 1
   globalLightLevel: 1
   day: {r: 0, g: 0.8, b: 1, a: 0}
   night: {r: 0, g: 0.003921569, b: 0.2509804, a: 0}

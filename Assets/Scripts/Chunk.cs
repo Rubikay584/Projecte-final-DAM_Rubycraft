@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
+//using System.Threading;
 using UnityEngine;
 
 public class Chunk {
@@ -31,17 +31,12 @@ public class Chunk {
 
     private bool _isActive;
     private bool isVoxelMapPopulated = false;
-    public bool threadLocked;
 
-    public Chunk(ChunkCoord _coord, World _world, bool generateOnLoad) {
+    public Chunk(ChunkCoord _coord, World _world) {
 
         coord = _coord;
         world = _world;
-        isActive = true;
 
-        if (generateOnLoad)
-            Init();
-        
     }
 
     public void Init() {
@@ -58,11 +53,7 @@ public class Chunk {
         chunkObject.name = coord.x + ", " + coord.z;
         position = chunkObject.transform.position;
 
-        if (world.enableThreading) {
-            Thread myThread = new Thread(new ThreadStart(PopulateVoxelMap));
-            myThread.Start();
-        } else
-            PopulateVoxelMap();
+        PopulateVoxelMap();
     }
 
     void PopulateVoxelMap() {
@@ -77,109 +68,99 @@ public class Chunk {
             }
         }
 
-        _updateChunk();
         isVoxelMapPopulated = true;
+
+        lock (world.ChunkUpdateThreadLock) {
+            world.chunksToUpdate.Add(this);
+        }
 
     }
 
     public void UpdateChunk() {
-        if (world.enableThreading) {
-            Thread myThread = new Thread(new ThreadStart(_updateChunk));
-            myThread.Start();
-        } else
-            _updateChunk();
+        while (modifications.Count > 0) {
+            VoxelMod v = modifications.Dequeue();
+            Vector3 pos = v.position -= position;
+            voxelMap[(int)pos.x, (int)pos.y, (int)pos.z].id = v.id;
+        }
+
+        ClearMeshData();
+        CalculateLight();
+
+        for (int y = 0; y < VoxelData.ChunkHeight; y++) {
+            for (int x = 0; x < VoxelData.ChunkWidth; x++) {
+                for (int z = 0; z < VoxelData.ChunkWidth; z++) {
+
+                    if (world.blockTypes[voxelMap[x, y, z].id].isSolid)
+                        UpdateMeshData(new Vector3(x, y, z));
+
+                }
+            }
+        }
+
+        lock (world.chunksToDraw)
+            world.chunksToDraw.Enqueue(this);
+
     }
 
     //private void _updateChunk() {
-
     //    threadLocked = true;
 
-    //    while (modifications.Count > 0) {
-    //        VoxelMod v = modifications.Dequeue();
-    //        Vector3 pos = v.position -= position;
-    //        voxelMap[(int)pos.x, (int)pos.y, (int)pos.z] = v.id;
-    //    }
+    //    try {
+    //        // Procesar modificaciones
+    //        while (modifications?.Count > 0) {
+    //            VoxelMod v = modifications.Dequeue();
+    //            if (v == null) continue;
 
-    //    ClearMeshData();
+    //            Vector3 pos = v.position - position;
+    //            int x = (int)pos.x, y = (int)pos.y, z = (int)pos.z;
 
-    //    for (int y = 0; y < VoxelData.ChunkHeight; y++) {
-    //        for (int x = 0; x < VoxelData.ChunkWidth; x++) {
-    //            for (int z = 0; z < VoxelData.ChunkWidth; z++) {
-
-    //                if (world.blockTypes[voxelMap[x, y, z]].isSolid)
-    //                    UpdateMeshData(new Vector3(x, y, z));
-
+    //            // Validar coordenadas dentro del chunk
+    //            if (x >= 0 && x < VoxelData.ChunkWidth &&
+    //                y >= 0 && y < VoxelData.ChunkHeight &&
+    //                z >= 0 && z < VoxelData.ChunkWidth) {
+    //                voxelMap[x, y, z].id = v.id;
     //            }
     //        }
+
+    //        ClearMeshData();
+    //        CalculateLight();
+
+    //        // Validar referencias esenciales
+    //        if (world == null || world.blockTypes == null || voxelMap == null) {
+    //            Debug.LogError("Referencias críticas no inicializadas");
+    //            return;
+    //        }
+
+    //        // Generar malla
+    //        for (int y = 0; y < VoxelData.ChunkHeight; y++) {
+    //            for (int x = 0; x < VoxelData.ChunkWidth; x++) {
+    //                for (int z = 0; z < VoxelData.ChunkWidth; z++) {
+
+    //                    byte blockId = voxelMap[x, y, z].id;
+
+    //                    // Validar ID de bloque
+    //                    if (blockId >= world.blockTypes.Length) {
+    //                        Debug.LogWarning($"ID de bloque inválido: {blockId} en posición ({x},{y},{z})");
+    //                        continue;
+    //                    }
+
+    //                    if (world.blockTypes[blockId] != null && world.blockTypes[blockId].isSolid) {
+    //                        UpdateMeshData(new Vector3(x, y, z));
+    //                    }
+    //                }
+    //            }
+    //        }
+
+    //        lock (world.chunksToDraw) {
+    //            if (world.chunksToDraw != null)
+    //                world.chunksToDraw.Enqueue(this);
+    //        }
+    //    } catch (System.Exception e) {
+    //        Debug.LogError($"Error en _updateChunk: {e.Message}\n{e.StackTrace}");
+    //    } finally {
+    //        threadLocked = false;
     //    }
-
-    //    lock (world.chunksToDraw) {
-    //        world.chunksToDraw.Enqueue(this);
-    //    }
-
-    //    threadLocked = false;
-
     //}
-
-    private void _updateChunk() {
-        threadLocked = true;
-
-        try {
-            // Procesar modificaciones
-            while (modifications?.Count > 0) {
-                VoxelMod v = modifications.Dequeue();
-                if (v == null) continue;
-
-                Vector3 pos = v.position - position;
-                int x = (int)pos.x, y = (int)pos.y, z = (int)pos.z;
-
-                // Validar coordenadas dentro del chunk
-                if (x >= 0 && x < VoxelData.ChunkWidth &&
-                    y >= 0 && y < VoxelData.ChunkHeight &&
-                    z >= 0 && z < VoxelData.ChunkWidth) {
-                    voxelMap[x, y, z].id = v.id;
-                }
-            }
-
-            ClearMeshData();
-            CalculateLight();
-
-            // Validar referencias esenciales
-            if (world == null || world.blockTypes == null || voxelMap == null) {
-                Debug.LogError("Referencias críticas no inicializadas");
-                return;
-            }
-
-            // Generar malla
-            for (int y = 0; y < VoxelData.ChunkHeight; y++) {
-                for (int x = 0; x < VoxelData.ChunkWidth; x++) {
-                    for (int z = 0; z < VoxelData.ChunkWidth; z++) {
-
-                        byte blockId = voxelMap[x, y, z].id;
-
-                        // Validar ID de bloque
-                        if (blockId >= world.blockTypes.Length) {
-                            Debug.LogWarning($"ID de bloque inválido: {blockId} en posición ({x},{y},{z})");
-                            continue;
-                        }
-
-                        if (world.blockTypes[blockId] != null && world.blockTypes[blockId].isSolid) {
-                            UpdateMeshData(new Vector3(x, y, z));
-                        }
-                    }
-                }
-            }
-
-            lock (world.chunksToDraw) {
-                if (world.chunksToDraw != null)
-                    world.chunksToDraw.Enqueue(this);
-            }
-        } catch (System.Exception e) {
-            Debug.LogError($"Error en _updateChunk: {e.Message}\n{e.StackTrace}");
-        } finally {
-            threadLocked = false;
-        }
-    }
 
     void CalculateLight() {
 
@@ -250,8 +231,10 @@ public class Chunk {
 
     public bool isEditable {
         get {
-            if (!isVoxelMapPopulated || threadLocked) return false;
-            else return true;
+            if (!isVoxelMapPopulated)
+                return false;
+            else
+                return true;
         }
     }
 
@@ -272,10 +255,14 @@ public class Chunk {
 
         voxelMap[xCheck, yCheck, zCheck].id = newID;
 
-        // Update Surrounding Chunks
-        UpdateSurroundingVoxels(xCheck, yCheck, zCheck);
+        lock (world.ChunkUpdateThreadLock) {
+            world.chunksToUpdate.Insert(0, this);
 
-        _updateChunk();
+            // Update Surrounding Chunks
+            UpdateSurroundingVoxels(xCheck, yCheck, zCheck);
+
+
+        }
     }
 
     void UpdateSurroundingVoxels(int x, int y, int z) {
@@ -285,7 +272,7 @@ public class Chunk {
             Vector3 currentVoxel = thisVoxel + VoxelData.faceChecks[p];
 
             if (!IsVoxelInChunk((int)currentVoxel.x, (int)currentVoxel.y, (int)currentVoxel.z)) {
-                world.GetChunkFromVector3(currentVoxel + position).UpdateChunk();
+                world.chunksToUpdate.Insert(0, world.GetChunkFromVector3(currentVoxel + position));
             }
         }
     }
@@ -301,7 +288,9 @@ public class Chunk {
         return voxelMap[x, y, z];
     }
 
-    public VoxelState GetVoxelFromGlobalVector3(Vector3 pos) {
+    public VoxelState GetVoxelFromGlobalVector3(Vector3 pos)
+    {
+
         int xCheck = Mathf.FloorToInt(pos.x);
         int yCheck = Mathf.FloorToInt(pos.y);
         int zCheck = Mathf.FloorToInt(pos.z);
@@ -310,7 +299,9 @@ public class Chunk {
         zCheck -= Mathf.FloorToInt(position.z);
 
         return voxelMap[xCheck, yCheck, zCheck];
+
     }
+
 
     void UpdateMeshData(Vector3 pos) {
         int x = Mathf.FloorToInt(pos.x);

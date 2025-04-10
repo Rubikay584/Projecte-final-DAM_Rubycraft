@@ -12,16 +12,18 @@ public static class Structure {
             height = minTrunkHeight;
 
         for (int i = 1; i < height; i++) {
-            queue.Enqueue(new VoxelMod(new Vector3(position.x, position.y + i, position.z), 6));
+            Vector3 trunkPos = new Vector3(position.x, position.y + i, position.z);
+            if (IsPositionInsideWorld(trunkPos))
+                queue.Enqueue(new VoxelMod(trunkPos, 6));
         }
 
 
         for (int x = -3; x < 4; x++) {
             for (int y = 0; y < 7; y++) {
                 for (int z = -3; z < 4; z++) {
-                    //Debug.Log("entrar for fulles "+x+y+z);
-                    //Debug.Log(x + " " + y + " " + z + " ");
-                    queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height + y, position.z + z), 5));
+                    Vector3 leafPos = new Vector3(position.x + x, position.y + height + y, position.z + z);
+                    if (IsPositionInsideWorld(leafPos))
+                        queue.Enqueue(new VoxelMod(leafPos, 5));
                 }
             }
         }
@@ -45,6 +47,14 @@ public static class Structure {
 
 
         return queue;
+    }
+
+    private static bool IsPositionInsideWorld(Vector3 pos) {
+        return (
+            pos.x >= 0 && pos.x < VoxelData.WorldSizeInVoxels &&
+            pos.y >= 0 && pos.y < VoxelData.ChunkHeight &&
+            pos.z >= 0 && pos.z < VoxelData.WorldSizeInVoxels
+        );
     }
 }
 
