@@ -6,7 +6,7 @@ public static class VoxelData {
 
     public static readonly int ChunkWidth = 16;
     public static readonly int ChunkHeight = 256;
-    public static readonly int WorldSizeInChunks = 20;
+    public static readonly int WorldSizeInChunks = 100;
 
     // Lightning Values
     public static float minLightLevel = 0.1f;

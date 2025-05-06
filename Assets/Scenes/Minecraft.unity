@@ -1401,7 +1401,6 @@ GameObject:
   - component: {fileID: 1079994028}
   - component: {fileID: 1079994031}
   - component: {fileID: 1079994030}
-  - component: {fileID: 1079994029}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1424,27 +1423,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1411932864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1079994029
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1079994027}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1079994030
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1506,7 +1484,6 @@ GameObject:
   - component: {fileID: 1145165486}
   - component: {fileID: 1145165489}
   - component: {fileID: 1145165488}
-  - component: {fileID: 1145165487}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1529,27 +1506,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2005545292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1145165487
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145165485}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1145165488
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1745,8 +1701,8 @@ MonoBehaviour:
   settings:
     version: 0.0.17
     viewDistance: 4
-    enableThreading: 0
-    mouseSensitivity: 2
+    enableThreading: 1
+    mouseSensitivity: 0.6
     seed: 0
   biome: {fileID: 11400000, guid: b1c048f58d4b0ff45a40829c892cf716, type: 2}
   globalLightLevel: 1
@@ -1755,7 +1711,7 @@ MonoBehaviour:
   player: {fileID: 169694028}
   spawnPosition: {x: 0, y: 0, z: 0}
   material: {fileID: 2100000, guid: f3cbf0599e2a10d48be52f757f43e204, type: 2}
-  transparentMaterial: {fileID: 2100000, guid: ba5e1b2f7b17fe84ba009f8148553645, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: f915cb5555b706b4db261288e5bf648b, type: 2}
   blockTypes:
   - blockName: Air
     isSolid: 0
