@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class World : MonoBehaviour {
 
     public Settings settings;
 
     [Header("World Generation Values")]
-    public BiomeAttributes biome;
+    public BiomeAttributes[] biomes;
 
     [Range(0f, 1f)] public float globalLightLevel;
     public Color day;
@@ -351,16 +353,49 @@ public class World : MonoBehaviour {
         // Bottom block of chunk, return bedrock.
         if (yPos == 0)
             return 11;
+        
+        /* BIOME SELECTION PASS */
+        int solidGroundHeight = 42;
+
+        float sumOfHeights = 0f;
+        int count = 0;
+        float strongestWeight = 0f;
+        int strongestBiomeIndex = 0;
+
+        for (int i = 0; i < biomes.Length; i++) {
+            float weight = Noise.Get2DPerlin(new Vector2(pos.x, pos.z), biomes[i].offset, biomes[i].scale);
+
+            // Track the strongest weight
+            if (weight > strongestWeight) {
+                strongestWeight = weight;
+                strongestBiomeIndex = i;
+            }
+
+            // Height of terrain (for the current biome), then multiply it by its weight.
+            float height = biomes[i].terrainHeight *
+                           Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biomes[i].terrainScale) * weight;
+
+            if (height > 0) {
+                sumOfHeights += height;
+                count++;
+            }
+        }
+
+        BiomeAttributes biome = biomes[strongestBiomeIndex];
+
+        sumOfHeights /= count;
+        int terrainHeight = Mathf.FloorToInt(sumOfHeights + solidGroundHeight);
+        
+        // BiomeAttributes biome = biomes[index];
 
         /* BASIC TERRAIN PASS */
-        int terrainHeight = Mathf.FloorToInt(biome.terrainHeight * Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.terrainScale)) + biome.solidGroundHeight;
         byte voxelValue = 0;
 
         if (yPos == terrainHeight)
-            voxelValue = 3; // Grass Block
-        else if (yPos < terrainHeight && yPos > terrainHeight - 4)
-            voxelValue = 4; // Dirt
-        else if (yPos > terrainHeight)
+            voxelValue = biome.surfaceBlock;
+        else if (yPos < terrainHeight && yPos > terrainHeight - 3)
+            voxelValue = biome.subSurfaceBlock;
+        else if (yPos > terrainHeight) // Air
             return 0; // Air
         else
             voxelValue = 1; // Stone
@@ -379,14 +414,12 @@ public class World : MonoBehaviour {
         }
 
         /* TREE PASS */
-        if (yPos == terrainHeight) {
-            if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.treeZoneScale) > biome.treeZoneThreshold) {
+        if (yPos == terrainHeight && biome.placeMajorFlora) {
+            if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraZoneScale) > biome.majorFloraZoneThreshold) {
                 //voxelValue = 11;
-                if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.treePlacementScale) > biome.treePlacementThreshold) {
+                if (Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.majorFloraPlacementScale) > biome.majorFloraPlacementThreshold) {
                     //voxelValue = 8;
-                    modifications.Enqueue(Structure.MakeTree(pos, biome.minTreeHeight, biome.maxTreeHeight));
-                    //Structure.MakeTree(new Vector3(71, 79, 68), modifications, biome.minTreeHeight, biome.maxTreeHeight);
-                    //Structure.MakeTree(new Vector3(pos.x, pos.y, pos.z), modifications, biome.minTreeHeight, biome.maxTreeHeight);
+                    modifications.Enqueue(Structure.GenerateMajorFlora(biome.majorFloraIndex, pos, biome.minHeight, biome.maxHeight));
                 }
             }
         }
@@ -471,6 +504,7 @@ public class Settings {
     [Header("Performance")]
     public int viewDistance;
     public bool enableThreading;
+    public bool enableAnim; // new
     
     [Header("Controls")]
     [Range(0.1f, 10f)] public float mouseSensitivity;

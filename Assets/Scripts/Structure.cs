@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Structure {
+
+    public static Queue<VoxelMod> GenerateMajorFlora(int index, Vector3 position, int minTrunkHeight,
+        int maxTrunkHeight) {
+
+        switch (index) {
+            case 0: return MakeTree(position, minTrunkHeight, maxTrunkHeight);
+            case 1: return MakeCacti(position, minTrunkHeight, maxTrunkHeight);
+        }
+        
+        return new Queue<VoxelMod>();
+    }
     public static Queue<VoxelMod> MakeTree(Vector3 position, int minTrunkHeight, int maxTrunkHeight) {
         Queue<VoxelMod> queue = new Queue<VoxelMod>();
 
@@ -14,37 +25,35 @@ public static class Structure {
         for (int i = 1; i < height; i++) {
             Vector3 trunkPos = new Vector3(position.x, position.y + i, position.z);
             if (IsPositionInsideWorld(trunkPos))
-                queue.Enqueue(new VoxelMod(trunkPos, 6));
+                queue.Enqueue(new VoxelMod(trunkPos, 6)); // Log
         }
-
-
+        
         for (int x = -3; x < 4; x++) {
             for (int y = 0; y < 7; y++) {
                 for (int z = -3; z < 4; z++) {
                     Vector3 leafPos = new Vector3(position.x + x, position.y + height + y, position.z + z);
                     if (IsPositionInsideWorld(leafPos))
-                        queue.Enqueue(new VoxelMod(leafPos, 5));
+                        queue.Enqueue(new VoxelMod(leafPos, 5)); // Leave
                 }
             }
         }
 
-        //for (int x = -2; x < 3; x++)
-        //    for (int z = -2; z < 3; z++) {
-        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 2, position.z + z), 5));
-        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 3, position.z + z), 5));
-        //    }
+        return queue;
+    }
+    
+    public static Queue<VoxelMod> MakeCacti(Vector3 position, int minTrunkHeight, int maxTrunkHeight) {
+        Queue<VoxelMod> queue = new Queue<VoxelMod>();
 
-        //for (int x = -1; x < 2; x++)
-        //    for (int z = -1; z < 2; z++)
-        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height - 1, position.z + z), 5));
+        int height = (int)(maxTrunkHeight * Noise.Get2DPerlin(new Vector2(position.x, position.z), 23456f, 2f));
 
-        //for (int x = -1; x < 2; x++)
-        //    if (x == 0)
-        //        for (int z = -1; z < 2; z++)
-        //            queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height, position.z + z), 5));
-        //    else
-        //        queue.Enqueue(new VoxelMod(new Vector3(position.x + x, position.y + height, position.z), 5));
+        if (height < minTrunkHeight)
+            height = minTrunkHeight;
 
+        for (int i = 1; i <= height; i++) {
+            Vector3 trunkPos = new Vector3(position.x, position.y + i, position.z);
+            if (IsPositionInsideWorld(trunkPos))
+                queue.Enqueue(new VoxelMod(trunkPos, 12)); // Cacti
+        }
 
         return queue;
     }
@@ -76,7 +85,7 @@ public static class Structure {
 //            queue.Enqueue(new VoxelMod(new Vector3(position.x, position.y + i, position.z), 6));
 
 
-//        // Determinar aleatoriamente el tipo de árbol
+//        // Determinar aleatoriamente el tipo de ï¿½rbol
 //        bool isBalloon = Random.value > 0.5f;
 
 //        if (isBalloon)
