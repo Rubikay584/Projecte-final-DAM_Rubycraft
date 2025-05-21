@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6b31f335457d6524ababfb6b649e850c
+guid: ad4f8863e96cc4f4ca368e579d65f12b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Monocraft
+  - MinecraftCHMC
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

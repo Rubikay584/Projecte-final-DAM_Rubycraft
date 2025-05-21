@@ -50,16 +50,12 @@ public class World : MonoBehaviour {
     public object ChunkUpdateThreadLock = new object();
 
     private void Start() {
-        string path = Application.dataPath + "/settings.json";
-        
-        if (!File.Exists(path)) {
-            string jsonExport = JsonUtility.ToJson(settings);
-            File.WriteAllText(path, jsonExport);
-        }
-        string jsonImport = File.ReadAllText(path);
+        string jsonImport = File.ReadAllText(Application.dataPath + "/settings.json");
         settings = JsonUtility.FromJson<Settings>(jsonImport);
         
-        Random.InitState(settings.seed);
+        Debug.Log("Generating new world using seed " + VoxelData.seed);
+        
+        Random.InitState(VoxelData.seed);
 
         Shader.SetGlobalFloat("minGlobalLightLevel", VoxelData.minLightLevel);
         Shader.SetGlobalFloat("maxGlobalLightLevel", VoxelData.maxLightLevel);
@@ -499,16 +495,13 @@ public class VoxelMod {
 [System.Serializable]
 public class Settings {
     [Header("Game Data")]
-    public string version;
+    public string version = "0.0.21";
     
     [Header("Performance")]
-    public int viewDistance;
-    public bool enableThreading;
-    public bool enableAnim; // new
+    public int viewDistance = 8;
+    public bool enableThreading = true;
+    // public bool enableAnim; // new
     
     [Header("Controls")]
-    [Range(0.1f, 10f)] public float mouseSensitivity;
-
-    [Header("World Generation")]
-    public int seed;
+    [Range(0.1f, 10f)] public float mouseSensitivity = 0.6f;
 }
