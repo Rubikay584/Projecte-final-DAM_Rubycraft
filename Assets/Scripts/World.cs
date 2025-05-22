@@ -41,6 +41,8 @@ public class World : MonoBehaviour {
 
     public bool _inUI = false;
 
+    public Clouds clouds;
+
     public GameObject debugScreen;
 
     public GameObject creativeInventoryWindow;
@@ -66,8 +68,8 @@ public class World : MonoBehaviour {
         }
 
         SetGlobalLightValue();
-        spawnPosition = new Vector3(((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f) , VoxelData.ChunkHeight - 125f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         GenerateWorld();
+        // spawnPosition = new Vector3(((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f) , VoxelData.ChunkHeight - 125f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
     }
 
@@ -112,6 +114,15 @@ public class World : MonoBehaviour {
 
             }
         }
+        
+        // TEST
+        Vector3 centerXZ = new Vector3(
+            VoxelData.WorldCenter, 0, VoxelData.WorldCenter
+        );
+        if (GetSurfacePosition(centerXZ, out Vector3 surfacePos)) {
+            spawnPosition = surfacePos;
+        }
+        // ENDTEST
 
         player.position = spawnPosition;
         CheckViewDistance();
@@ -241,6 +252,8 @@ public class World : MonoBehaviour {
     }
 
     void CheckViewDistance() {
+        clouds.UpdateClouds();
+        
         ChunkCoord coord = GetChunkCoordFromVector3(player.position);
         playerLastChunkCoord = playerCurrentChunkCoord;
 
@@ -303,6 +316,21 @@ public class World : MonoBehaviour {
         return new VoxelState(GetVoxel(pos));
 
     }
+    
+    // TEST
+    public bool GetSurfacePosition(Vector3 start, out Vector3 surfacePosition) {
+        for (int y = VoxelData.ChunkHeight - 1; y >= 0; y--) {
+            Vector3 checkPos = new Vector3(start.x, y, start.z);
+            if (CheckForVoxel(checkPos)) {
+                surfacePosition = checkPos + Vector3.up;
+                return true;
+            }
+        }
+
+        surfacePosition = Vector3.zero;
+        return false;
+    }
+    // ENDTEST
 
     public bool inUI {
         get { return _inUI; }
@@ -499,6 +527,7 @@ public class Settings {
     
     [Header("Performance")]
     public int viewDistance = 8;
+    public CloudStyle clouds = CloudStyle.Off;
     public bool enableThreading = true;
     // public bool enableAnim; // new
     

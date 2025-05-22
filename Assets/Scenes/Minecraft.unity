@@ -1701,10 +1701,9 @@ MonoBehaviour:
   settings:
     version: 0.0.19
     viewDistance: 4
+    clouds: 0
     enableThreading: 1
-    enableAnim: 0
     mouseSensitivity: 0.6
-    seed: 149116
   biomes:
   - {fileID: 11400000, guid: b1c048f58d4b0ff45a40829c892cf716, type: 2}
   - {fileID: 11400000, guid: 9818e71ffff7918479b1871df3beb2b5, type: 2}
@@ -1886,6 +1885,7 @@ MonoBehaviour:
     leftFaceTexture: 18
     rightFaceTexture: 18
   _inUI: 0
+  clouds: {fileID: 1887002727}
   debugScreen: {fileID: 533281656}
   creativeInventoryWindow: {fileID: 920442162}
   cursorSlot: {fileID: 1952666955}
@@ -2183,6 +2183,55 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7971342345491841973, guid: 33d600b9f0682b342807b35a06ebbfbb, type: 3}
   m_PrefabInstance: {fileID: 1881197800}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1887002726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887002728}
+  - component: {fileID: 1887002727}
+  m_Layer: 0
+  m_Name: Clouds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1887002727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887002726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202c683102664604b84d95633f690255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cloudHeight: 100
+  cloudDepth: 1
+  cloudPattern: {fileID: 2800000, guid: cb46b08164f46ba40aeeebadc7af612b, type: 3}
+  cloudMaterial: {fileID: 2100000, guid: 7032798de1731fa409a4f244ec7ecf70, type: 2}
+  world: {fileID: 1334741177}
+--- !u!4 &1887002728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887002726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 16, y: 1, z: 16}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899686415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,3 +2729,4 @@ SceneRoots:
   - {fileID: 662132367}
   - {fileID: 1411932864}
   - {fileID: 2005545292}
+  - {fileID: 1887002728}
