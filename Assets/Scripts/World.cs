@@ -3,8 +3,11 @@ using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using System.IO;
+using System.Numerics;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class World : MonoBehaviour {
 
@@ -66,8 +69,8 @@ public class World : MonoBehaviour {
         }
 
         SetGlobalLightValue();
-        spawnPosition = new Vector3(((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f) , VoxelData.ChunkHeight - 125f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         GenerateWorld();
+        spawnPosition = new Vector3(((VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f) , VoxelData.ChunkHeight - 125f, (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f);
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
     }
 
@@ -111,6 +114,15 @@ public class World : MonoBehaviour {
                 chunksToCreate.Add(newChunk);
 
             }
+        }
+        
+        Vector3 centerXZ = new Vector3(
+            (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f,
+            0,
+            (VoxelData.WorldSizeInChunks * VoxelData.ChunkWidth) / 2f
+        );
+        if (GetSurfacePosition(centerXZ, out Vector3 surfacePos)) {
+            spawnPosition = surfacePos;
         }
 
         player.position = spawnPosition;
@@ -289,8 +301,7 @@ public class World : MonoBehaviour {
         return blockTypes[GetVoxel(pos)].isSolid;
     }
 
-    public VoxelState GetVoxelState(Vector3 pos)
-    {
+    public VoxelState GetVoxelState(Vector3 pos) {
 
         ChunkCoord thisChunk = new ChunkCoord(pos);
 
@@ -302,6 +313,19 @@ public class World : MonoBehaviour {
 
         return new VoxelState(GetVoxel(pos));
 
+    }
+
+    public bool GetSurfacePosition(Vector3 start, out Vector3 surfacePosition) {
+        for (int y = VoxelData.ChunkHeight - 1; y >= 0; y--) {
+            Vector3 checkPos = new Vector3(start.x, y, start.z);
+            if (CheckForVoxel(checkPos)) {
+                surfacePosition = checkPos + Vector3.up;
+                return true;
+            }
+        }
+
+        surfacePosition = Vector3.zero;
+        return false;
     }
 
     public bool inUI {

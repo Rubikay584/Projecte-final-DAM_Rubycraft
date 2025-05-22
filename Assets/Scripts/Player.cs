@@ -35,9 +35,17 @@ public class Player : MonoBehaviour {
     //public Text selectedBlockText;
     public Toolbar toolbar;
 
+    [Header("Sounds")]
+    public AudioClip[] footstepClips;
+    private AudioSource footstepAudio;
+    private float footstepTimer = 0f;
+    public float stepRate = 0.5f;
+    private int lastClipIndex = -1;
+
     private void Start() {
         cam = GameObject.Find("Main Camera").transform;
         world = GameObject.Find("World").GetComponent<World>();
+        footstepAudio = GetComponent<AudioSource>();
 
         world.inUI = false;
     }
@@ -45,11 +53,10 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         if (!world.inUI) {
             CalculateVelocity();
+            HandleFootsteps();
             if (jumpRequest)
                 Jump();
 
-            transform.Rotate(Vector3.up * mouseHorizontal * world.settings.mouseSensitivity);
-            cam.Rotate(Vector3.right * -mouseVertical * world.settings.mouseSensitivity);
             transform.Translate(velocity, Space.World);
         }
     }
@@ -62,6 +69,9 @@ public class Player : MonoBehaviour {
         if (!world.inUI) {
             GetPlayerInputs();
             placeCursorBlock();
+            
+            transform.Rotate(Vector3.up * mouseHorizontal * world.settings.mouseSensitivity);
+            cam.Rotate(Vector3.right * -mouseVertical * world.settings.mouseSensitivity);
         }
     }
 
@@ -186,6 +196,30 @@ public class Player : MonoBehaviour {
         } else {
             return upSpeed;
         }
+    }
+
+    private void HandleFootsteps() {
+        if (isGrounded && (horizontal != 0 || vertical != 0)) {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f) {
+                PlayFootstep();
+                footstepTimer = stepRate / (isSprinting ? 1.5f : 1f);
+            }
+        } else {
+            footstepTimer = 0f;
+        }
+    }
+
+    private void PlayFootstep() {
+        if (footstepClips.Length == 0) return;
+
+        int index;
+        do {
+            index = Random.Range(0, footstepClips.Length);
+        } while (index == lastClipIndex && footstepClips.Length > 1);
+        
+        lastClipIndex = index;
+        footstepAudio.PlayOneShot(footstepClips[index]);
     }
 
     public bool front {

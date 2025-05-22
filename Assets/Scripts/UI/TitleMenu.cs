@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class TitleMenu : MonoBehaviour {
     public GameObject mainMenuObject;
@@ -38,9 +39,28 @@ public class TitleMenu : MonoBehaviour {
         }
     }
 
+
     public void StartGame() {
-        VoxelData.seed = Mathf.Abs(seedField.text.GetHashCode()) / VoxelData.WorldSizeInChunks;
+        string rawSeed = seedField.text;
+        string cleanedSeed = Regex.Replace(rawSeed, @"[^\d\-]", "");
+
+        if (int.TryParse(cleanedSeed, out int parsedSeed)) {
+            VoxelData.seed = parsedSeed;
+        } else {
+            VoxelData.seed = GetDeterministicSeed(rawSeed);
+        }
+
         SceneManager.LoadScene("Minecraft", LoadSceneMode.Single);
+    }
+
+
+    
+    int GetDeterministicSeed(string input) {
+        int hash = 0;
+        foreach (char c in input) {
+            hash = (hash * 31 + c) & 0x7FFFFFFF;
+        }
+        return hash;
     }
 
     public void EnterSettings() {

@@ -21,7 +21,7 @@ MonoBehaviour:
   subSurfaceBlock: 4
   majorFloraIndex: 0
   majorFloraZoneScale: 1.3
-  majorFloraZoneThreshold: 0.384
+  majorFloraZoneThreshold: 0.525
   majorFloraPlacementScale: 5
   majorFloraPlacementThreshold: 0.755
   placeMajorFlora: 1
