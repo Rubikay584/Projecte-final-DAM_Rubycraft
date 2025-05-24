@@ -1700,6 +1700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     version: 0.0.19
+    loadDistance: 8
     viewDistance: 4
     clouds: 0
     enableThreading: 1
@@ -1889,6 +1890,9 @@ MonoBehaviour:
   debugScreen: {fileID: 533281656}
   creativeInventoryWindow: {fileID: 920442162}
   cursorSlot: {fileID: 1952666955}
+  worldData:
+    worldName: Prototype
+    seed: 0
 --- !u!4 &1334741178
 Transform:
   m_ObjectHideFlags: 0

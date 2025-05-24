@@ -50,6 +50,7 @@
     <Compile Include="Assets\Scripts\ItemStack.cs" />
     <Compile Include="Assets\Scripts\Structure.cs" />
     <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Scripts\Data\WorldData.cs" />
     <Compile Include="Assets\Scripts\CreativeInventory.cs" />
     <Compile Include="Assets\Scripts\Clouds.cs" />
     <Compile Include="Assets\Scripts\Chunk.cs" />
@@ -58,9 +59,10 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\DebugScreen.cs" />
     <Compile Include="Assets\Scripts\Toolbar.cs" />
-    <Compile Include="Assets\Scripts\LOAD\MenuController.cs" />
     <Compile Include="Assets\Scripts\UIItemSlot.cs" />
     <Compile Include="Assets\Scripts\UI\TitleMenu.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\Data\ChunkData.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
